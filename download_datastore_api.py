@@ -41,15 +41,17 @@ def all_languages(xml_lang, title_narrative_lang, description_narrative_lang):
     )
 
 
-def parse_policy_markers(policy_marker_codes, policy_marker_significances):
+def parse_policy_markers(policy_marker_codes, policy_marker_significances, policy_marker_vocabularies):
     results = {'{}_sig'.format(marker_name): '0' for marker_name in policy_marker_codelist.values()}
+    non_oecd_vocabulary_indices = [i for i, vocab in enumerate(policy_marker_vocabularies) if vocab=='99']
     # Sense check
     if len(policy_marker_codes) == len(policy_marker_significances):
         for marker_code, marker_name in policy_marker_codelist.items():
             if marker_code in policy_marker_codes:
                 marker_index = policy_marker_codes.index(marker_code)
-                marker_sig = policy_marker_significances[marker_index]
-                results['{}_sig'.format(marker_name)] = marker_sig
+                if marker_index not in non_oecd_vocabulary_indices:
+                    marker_sig = policy_marker_significances[marker_index]
+                    results['{}_sig'.format(marker_name)] = marker_sig
     return results
 
 
@@ -68,7 +70,7 @@ def main():
                 'https://api.iatistandard.org/datastore/activity/select'
                 '?q=(*:*)'
                 '&sort=id asc'
-                '&wt=json&fl=iati_identifier,reporting_org_ref,xml_lang,title_narrative,title_xml_lang,description_narrative,description_xml_lang,policy_marker_code,policy_marker_significance&rows={}&cursorMark={}'
+                '&wt=json&fl=iati_identifier,reporting_org_ref,xml_lang,title_narrative,title_xml_lang,description_narrative,description_xml_lang,policy_marker_code,policy_marker_significance,policy_marker_vocabulary&rows={}&cursorMark={}'
             ).format(rows, next_cursor_mark)
             api_json_str = requests.get(url, headers={'Ocp-Apim-Subscription-Key': API_KEY}).content
             api_content = json.loads(api_json_str)
@@ -86,7 +88,7 @@ def main():
                 results_dict['text'] = ' '.join(activity.get('title_narrative', []) + activity.get('description_narrative', []))
                 results_dict['languages'] = '|'.join(all_languages(activity.get('xml_lang'), activity.get('title_xml_lang', []), activity.get('description_xml_lang', [])))
                 policy_marker_codes = activity.get('policy_marker_code', [])
-                results_dict.update(parse_policy_markers(policy_marker_codes, activity.get('policy_marker_significance', [])))
+                results_dict.update(parse_policy_markers(policy_marker_codes, activity.get('policy_marker_significance', []), activity.get('policy_marker_vocabulary', [])))
                 reporting_org_relevance[org_ref].update(policy_marker_codes)
                 results.append(results_dict)
             if len(results) > 0:
