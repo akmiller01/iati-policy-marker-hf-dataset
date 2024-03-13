@@ -89,8 +89,9 @@ def main():
                 results_dict.update(parse_policy_markers(policy_marker_codes, activity.get('policy_marker_significance', [])))
                 reporting_org_relevance[org_ref].update(policy_marker_codes)
                 results.append(results_dict)
-            df = pd.DataFrame.from_records(results)
-            df.to_csv('data/{}.csv'.format(iteration), index=False)
+            if len(results) > 0:
+                df = pd.DataFrame.from_records(results)
+                df.to_csv('data/{}.csv'.format(iteration), index=False)
             if bar.value + len_results <= bar.max_value:
                 bar.update(bar.value + len_results)
 
