@@ -85,7 +85,6 @@ def main():
                 results_dict['reporting_org_ref'] = org_ref
                 results_dict['text'] = ' '.join(activity.get('title_narrative', []) + activity.get('description_narrative', []))
                 results_dict['languages'] = '|'.join(all_languages(activity.get('xml_lang'), activity.get('title_xml_lang', []), activity.get('description_xml_lang', [])))
-                results_dict['text'] = activity['title_narrative'][0]
                 policy_marker_codes = activity.get('policy_marker_code', [])
                 results_dict.update(parse_policy_markers(policy_marker_codes, activity.get('policy_marker_significance', [])))
                 reporting_org_relevance[org_ref].update(policy_marker_codes)
