@@ -70,7 +70,7 @@ def main():
                 'https://api.iatistandard.org/datastore/activity/select'
                 '?q=(*:*)'
                 '&sort=id asc'
-                '&wt=json&fl=iati_identifier,reporting_org_ref,xml_lang,title_narrative,title_xml_lang,description_narrative,description_xml_lang,policy_marker_code,policy_marker_significance,policy_marker_vocabulary&rows={}&cursorMark={}'
+                '&wt=json&fl=iati_identifier,reporting_org_ref,xml_lang,title_narrative,title_narrative_xml_lang,description_narrative,description_narrative_xml_lang,policy_marker_code,policy_marker_significance,policy_marker_vocabulary&rows={}&cursorMark={}'
             ).format(rows, next_cursor_mark)
             api_json_str = requests.get(url, headers={'Ocp-Apim-Subscription-Key': API_KEY}).content
             api_content = json.loads(api_json_str)
@@ -86,7 +86,7 @@ def main():
                 org_ref = activity['reporting_org_ref']
                 results_dict['reporting_org_ref'] = org_ref
                 results_dict['text'] = ' '.join(activity.get('title_narrative', []) + activity.get('description_narrative', []))
-                results_dict['languages'] = '|'.join(all_languages(activity.get('xml_lang'), activity.get('title_xml_lang', []), activity.get('description_xml_lang', [])))
+                results_dict['languages'] = '|'.join(all_languages(activity.get('xml_lang'), activity.get('title_narrative_xml_lang', []), activity.get('description_narrative_xml_lang', [])))
                 policy_marker_codes = activity.get('policy_marker_code', [])
                 results_dict.update(parse_policy_markers(policy_marker_codes, activity.get('policy_marker_significance', []), activity.get('policy_marker_vocabulary', [])))
                 reporting_org_relevance[org_ref].update(policy_marker_codes)
