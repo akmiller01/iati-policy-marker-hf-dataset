@@ -41,9 +41,8 @@ def all_languages(xml_lang, title_narrative_lang, description_narrative_lang):
     )
 
 
-def parse_policy_markers(policy_marker_codes, policy_marker_significances, policy_marker_vocabularies):
+def parse_policy_markers(policy_marker_codes, policy_marker_significances, non_oecd_vocabulary_indices):
     results = {'{}_sig'.format(marker_name): '0' for marker_name in policy_marker_codelist.values()}
-    non_oecd_vocabulary_indices = [i for i, vocab in enumerate(policy_marker_vocabularies) if vocab=='99']
     # Sense check
     if len(policy_marker_codes) == len(policy_marker_significances):
         for marker_code, marker_name in policy_marker_codelist.items():
@@ -88,8 +87,10 @@ def main():
                 results_dict['text'] = ' '.join(activity.get('title_narrative', []) + activity.get('description_narrative', []))
                 results_dict['languages'] = '|'.join(all_languages(activity.get('xml_lang'), activity.get('title_narrative_xml_lang', []), activity.get('description_narrative_xml_lang', [])))
                 policy_marker_codes = activity.get('policy_marker_code', [])
-                results_dict.update(parse_policy_markers(policy_marker_codes, activity.get('policy_marker_significance', []), activity.get('policy_marker_vocabulary', [])))
-                reporting_org_relevance[org_ref].update(policy_marker_codes)
+                non_oecd_vocabulary_indices = [i for i, vocab in enumerate(activity.get('policy_marker_vocabulary', [])) if vocab=='99']
+                results_dict.update(parse_policy_markers(policy_marker_codes, activity.get('policy_marker_significance', []), non_oecd_vocabulary_indices))
+                filtered_policy_marker_codes = [policy_marker_codes[i] for i in range(len(policy_marker_codes)) if i not in non_oecd_vocabulary_indices]
+                reporting_org_relevance[org_ref].update(filtered_policy_marker_codes)
                 results.append(results_dict)
             if len(results) > 0:
                 df = pd.DataFrame.from_records(results)
