@@ -69,7 +69,7 @@ def main():
                 'https://api.iatistandard.org/datastore/activity/select'
                 '?q=(*:*)'
                 '&sort=id asc'
-                '&wt=json&fl=iati_identifier,reporting_org_ref,xml_lang,title_narrative,title_narrative_xml_lang,description_narrative,description_narrative_xml_lang,policy_marker_code,policy_marker_significance,policy_marker_vocabulary&rows={}&cursorMark={}'
+                '&wt=json&fl=iati_identifier,activity_date_iso_date,reporting_org_ref,xml_lang,title_narrative,title_narrative_xml_lang,description_narrative,description_narrative_xml_lang,policy_marker_code,policy_marker_significance,policy_marker_vocabulary&rows={}&cursorMark={}'
             ).format(rows, next_cursor_mark)
             api_json_str = requests.get(url, headers={'Ocp-Apim-Subscription-Key': API_KEY}).content
             api_content = json.loads(api_json_str)
@@ -86,6 +86,7 @@ def main():
                 results_dict['reporting_org_ref'] = org_ref
                 results_dict['text'] = ' '.join(activity.get('title_narrative', []) + activity.get('description_narrative', []))
                 results_dict['languages'] = '|'.join(all_languages(activity.get('xml_lang'), activity.get('title_narrative_xml_lang', []), activity.get('description_narrative_xml_lang', [])))
+                results_dict['activity_dates'] = '|'.join(activity.get('activity_date_iso_date', []))
                 policy_marker_codes = activity.get('policy_marker_code', [])
                 non_oecd_vocabulary_indices = [i for i, vocab in enumerate(activity.get('policy_marker_vocabulary', [])) if vocab=='99']
                 results_dict.update(parse_policy_markers(policy_marker_codes, activity.get('policy_marker_significance', []), non_oecd_vocabulary_indices))
