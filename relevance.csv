@@ -199,6 +199,7 @@ True,False,False,False,False,False,False,False,True,False,False,False,GB-COH-041
 False,False,False,False,False,False,False,False,False,False,False,False,NL-KVK-68758766
 True,False,True,True,False,False,True,False,True,False,False,False,NL-KVK-41158230
 False,False,False,False,False,False,False,False,False,False,False,False,GB-COH-11080032
+True,False,True,True,False,False,False,False,False,False,False,True,ES-CIF-G81164105
 False,False,False,False,False,False,False,False,False,False,False,False,GB-CHC-1187721
 False,False,True,False,False,False,False,False,False,False,False,False,BJ-IFU-6201300688700
 False,False,True,False,False,False,False,False,False,False,False,False,BJ-IFU-5200081145006
@@ -268,7 +269,6 @@ False,False,False,False,False,False,False,False,False,False,False,False,NL-KVK-3
 True,False,True,True,False,False,False,False,False,False,False,False,BE-BCE_KBO-0443262185
 True,False,True,False,False,False,False,False,True,False,False,False,KE-RCO-C1-61
 True,True,True,True,True,True,True,True,True,False,False,False,BE-BCE_KBO-0472089102
-True,False,True,True,False,False,False,False,False,False,False,True,ES-CIF-G81164105
 False,True,False,False,False,False,False,False,False,False,False,False,ML-NIF-400100027H
 False,False,False,False,False,False,False,False,False,False,False,False,GB-CHC-290767
 True,True,True,True,True,True,True,True,True,False,False,False,BE-BCE_KBO-0442168263
@@ -475,11 +475,13 @@ False,False,False,False,False,False,False,False,False,False,False,False,US-EIN-8
 False,False,False,False,False,False,False,False,False,False,False,False,XI-IATI-IATI-BBDN
 False,False,False,False,False,False,False,False,False,False,False,False,NL-KVK-34185938
 False,False,False,False,False,False,False,False,True,False,False,False,BW-CIPA-CO20151011
+True,False,False,False,False,False,False,False,False,True,False,True,NL-KVK-41197577
 True,True,True,True,True,True,True,True,True,False,False,False,BE-BCE_KBO-0478060441
 False,False,False,False,False,False,False,False,False,False,False,False,US-EIN-81-2339233
 False,False,True,False,False,False,False,False,False,False,False,False,CH-FDJP-CHE109994012
 False,False,False,False,False,False,False,False,False,False,False,False,GB-COH-RC000053
 False,False,False,False,False,True,False,False,False,False,False,False,US-EIN-74-2244146
+False,False,False,False,False,False,False,False,False,False,False,False,XM-DAC-46025
 False,False,False,False,False,False,False,False,False,False,False,False,KE-KRA-P051161193S
 False,False,False,False,False,False,False,False,False,False,False,False,US-EIN-52-0595110
 True,True,True,True,True,True,True,True,True,False,False,False,BE-BCE_KBO-0416867297
@@ -649,7 +651,6 @@ False,False,False,False,False,False,False,False,False,False,False,False,MZ-MOJ-1
 False,False,False,False,False,False,False,False,False,False,False,False,GB-UKPRN-10007790
 True,False,False,False,False,False,False,False,False,False,False,False,PS-MOI-QR177HR
 False,False,False,False,False,False,False,False,False,False,False,False,GB-CHC-1108718
-True,False,False,False,False,False,False,False,False,True,False,True,NL-KVK-41197577
 False,False,False,False,False,False,False,False,False,False,False,False,KE-RCO-CLG-ABF2JM
 False,False,False,False,False,False,False,False,False,False,False,False,US-EIN-23-2220051
 True,False,True,True,True,False,True,False,True,False,False,False,NL-KVK-27108436
@@ -660,7 +661,6 @@ False,False,False,False,False,False,False,False,False,False,False,False,IT-CF-95
 False,False,False,False,False,False,False,False,False,False,False,False,GB-CHC-1158206
 True,True,False,False,False,False,False,False,False,False,False,False,BE-BCE_KBO-0419872616
 False,True,False,False,False,False,False,False,False,False,False,False,ML-NIF-055000335T
-False,False,False,False,False,False,False,False,False,False,False,False,NP-CRO-45995/063/064
 False,False,False,False,False,False,False,False,False,False,False,False,GB-CHC-1101217
 False,False,False,False,False,False,False,False,False,False,False,False,NL-KVK-58279199
 False,False,False,False,False,False,False,False,False,False,False,False,NL-KVK-53815211
@@ -1110,6 +1110,7 @@ True,False,True,False,False,False,False,False,True,False,False,False,BI-NIF-4000
 True,True,True,True,True,True,True,True,True,False,False,False,BE-BCE_KBO-0479222461
 False,False,False,False,False,False,False,False,True,False,False,False,US-EIN-53-0235320
 False,False,False,False,False,False,False,False,False,False,False,False,NL-KVK-50130536
+False,False,False,False,False,False,False,False,False,False,False,True,NP-CRO-45995/063/064
 False,False,False,False,False,False,False,False,False,False,False,False,SN-NINEA-621108990A0
 False,False,False,False,False,False,False,False,False,False,False,False,LB-MOI-6491
 False,False,False,False,False,False,False,False,False,False,False,False,IL-RA-580675486
@@ -1290,6 +1291,7 @@ False,False,False,False,False,False,False,False,False,False,False,False,DK-CVR-2
 True,False,False,False,False,False,False,False,False,False,False,False,XI-IATI-RUF
 True,False,False,False,False,False,False,False,True,False,False,False,IN-MHA-231650063
 False,False,False,False,False,False,False,False,False,False,False,False,GB-CHC-1049160
+True,False,False,False,False,False,False,False,False,False,True,False,NL-KVK-91420784
 False,False,False,False,False,False,False,False,False,False,False,False,GB-COH-08567552
 True,False,False,False,False,False,False,False,False,False,False,False,CO-RUE-800121811
 False,False,False,False,False,False,False,False,False,False,False,False,US-EIN-US-EIN-300739799

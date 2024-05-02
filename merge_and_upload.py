@@ -36,7 +36,7 @@ def main():
         all_data = all_data.loc[all_data[marker_name].isin([True, False])]
     dataset = Dataset.from_pandas(all_data, preserve_index=False)
     dataset.save_to_disk("dataset")
-    dataset.push_to_hub("alex-miller/iati-policy-markers")
+    dataset.push_to_hub("devinitorg/iati-policy-markers")
 
 
 if __name__ == '__main__':
