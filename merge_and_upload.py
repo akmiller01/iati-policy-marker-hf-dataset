@@ -5,7 +5,11 @@ import pandas as pd
 import glob
 from tqdm import tqdm
 import os
+import tiktoken
 
+
+global tokenizer
+tokenizer = tiktoken.encoding_for_model('gpt-4o-mini')
 
 policy_marker_codelist = {
     '1': 'gender_equality',
@@ -23,6 +27,13 @@ policy_marker_codelist = {
 }
 
 
+def count_tokens(example):
+    token_count = 0
+    if example['text'] is not None and len(example['text']) > 0:
+        token_count = len(tokenizer.encode(example['text']))
+    return {'count': token_count}
+
+
 def main():
     df_list = list()
     csv_filenames = glob.glob('./data/*.csv')
@@ -35,6 +46,8 @@ def main():
         all_data = all_data.loc[all_data['{}_sig'.format(marker_name)].isin([0, 1, 2, 3, 4])]
         all_data = all_data.loc[all_data[marker_name].isin([True, False])]
     dataset = Dataset.from_pandas(all_data, preserve_index=False)
+    total_token_count = sum(dataset.map(count_tokens)['count'])
+    print("Total token count: {}".format(total_token_count))
     dataset.save_to_disk("dataset")
     dataset.push_to_hub("devinitorg/iati-policy-markers")
 
